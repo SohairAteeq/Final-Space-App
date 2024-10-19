@@ -612,7 +612,6 @@ const neoData = [
     "properties": "Diameter ~1.5 km, irregular shape",
     "details": "An asteroid believed to have a cometary origin due to its irregular shape and surface features."
   }
-
 ];
 
 const neoGroup = new THREE.Group();
@@ -789,11 +788,16 @@ function showInfoPopup(object) {
     data = object.userData.neoData;
   }
 
+  // Format properties into a string
+  const propertiesString = Object.entries(data.properties)
+    .map(([key, value]) => `<strong>${key}:</strong> ${value}`)
+    .join('<br>');
+
   infoPopup.innerHTML = `
     <h2>${data.name}</h2>
     <p><strong>Fact:</strong> ${data.fact || data.uniqueness}</p>
     <h3>Properties:</h3>
-    <p>${data.properties}</p>
+    <p>${propertiesString}</p>
     <p>${data.description || data.details}</p>
   `;
   infoPopup.style.display = 'block';
